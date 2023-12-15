@@ -23,7 +23,7 @@ namespace NewTest.Pages.Students
 
         public async Task OnGetAsync()
         {
-            Student = await _context.Students.Take(3).ToListAsync();
+            Student = await _context.Students.Take(10).ToListAsync();
         }
     }
 }
