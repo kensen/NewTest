@@ -68,6 +68,7 @@ namespace NewTest.Pages.Students
 
             //return RedirectToPage("./Index");
 
+
             var studentToUpdate = await _context.Students.FindAsync(id);
             if(studentToUpdate == null)
             {
@@ -85,9 +86,9 @@ namespace NewTest.Pages.Students
 
         }
 
-        private bool StudentExists(int id)
-        {
-            return _context.Students.Any(e => e.ID == id);
-        }
+        //private bool StudentExists(int id)
+        //{
+        //    return _context.Students.Any(e => e.ID == id);
+        //}
     }
 }
