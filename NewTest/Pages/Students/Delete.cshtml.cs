@@ -56,7 +56,7 @@ namespace NewTest.Pages.Students
             }
 
             var student = await _context.Students.FindAsync(id);
-            if (student != null)
+            if (student == null)
             {
                 return NotFound();
             }
