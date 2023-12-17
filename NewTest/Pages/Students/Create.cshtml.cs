@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using NewTest.Data;
 using NewTest.Modles;
 
+
 namespace NewTest.Pages.Students
 {
     public class CreateModel : PageModel
