@@ -33,13 +33,14 @@ namespace NewTest.Pages.Students
 
             CurrentFilter = searchString;
 
+            //使用IQueryable 对象使用数据库进行Where 语句执行，如果使用  IEnumerable 集合 则先从数据库全量取出之后内存进行筛选，性能较低
             IQueryable<Student> studentsIQ = from s in _context.Students
                 select s;
 
             if (!String.IsNullOrEmpty(searchString))
             {
-                studentsIQ = studentsIQ.Where(s => s.LastName.Contains(searchString)
-                                                   || s.FirstMidName.Contains(searchString));
+                studentsIQ = studentsIQ.Where(s => s.LastName.ToUpper().Contains(searchString.ToUpper())
+                                                   || s.FirstMidName.ToUpper().Contains(searchString.ToUpper()));
 
             }
 
