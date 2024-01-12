@@ -20,6 +20,8 @@ namespace NewTest.Pages.Courses
         }
 
         public IList<Course> Courses { get;set; } 
+       // public IList<CourseViewModel> CourseVM { get; set; }
+
 
         public async Task OnGetAsync()
         {
@@ -27,6 +29,22 @@ namespace NewTest.Pages.Courses
                 .Include(c => c.Department)
                 .AsNoTracking()
                 .ToListAsync();
+
+            //CourseVM=await _context.Courses.Select(p=>new CourseViewModel 
+            //{ 
+            //    CourseID=p.CourseID,
+            //    Title=p.Title,
+            //    DepartmentName=p.Department.Name
+            //}).ToListAsync();
+
         }
     }
+
+    //public class CourseViewModel
+    //{
+    //    public int CourseID { get; set; }
+    //    public string Title { get; set; }
+    //    public int Credits { get; set; }
+    //    public string DepartmentName { get; set; } 
+    //}
 }
