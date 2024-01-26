@@ -10,7 +10,7 @@ using NewTest.Modles;
 
 namespace NewTest.Pages.Courses
 {
-    public class CreateModel : PageModel
+    public class CreateModel : DepartmentNamePageModel
     {
         private readonly NewTest.Data.SchoolContext _context;
 
@@ -21,7 +21,8 @@ namespace NewTest.Pages.Courses
 
         public IActionResult OnGet()
         {
-        ViewData["DepartmentID"] = new SelectList(_context.Departments, "DepartmentId", "DepartmentId");
+            //ViewData["DepartmentID"] = new SelectList(_context.Departments, "DepartmentId", "DepartmentId");
+            PopulateDepartmentsDropDownList(_context);
             return Page();
         }
 
@@ -31,15 +32,29 @@ namespace NewTest.Pages.Courses
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid)
-            {
-                return Page();
+            //if (!ModelState.IsValid)
+            //{
+            //    return Page();
+            //}
+
+            //_context.Courses.Add(Course);
+            //await _context.SaveChangesAsync();
+
+            //return RedirectToPage("./Index");
+
+            var emptCourse = new Course();
+            if(await TryUpdateModelAsync<Course>(
+                emptCourse,
+                "course",
+                s=>s.CourseID,s=>s.DepartmentID,s=>s.Title,s=>s.Credits                
+                )) 
+            { 
+                _context.Courses.Add(emptCourse);
+                await _context.SaveChangesAsync();
+                return RedirectToPage("./Index");
             }
-
-            _context.Courses.Add(Course);
-            await _context.SaveChangesAsync();
-
-            return RedirectToPage("./Index");
+            PopulateDepartmentsDropDownList(_context, emptCourse.DepartmentID);
+            return Page();
         }
     }
 }
