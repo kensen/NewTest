@@ -19,6 +19,7 @@ namespace NewTest.Pages.Courses
                                    orderby d.Name // Sort by name.
                                    select d;
 
+
             DepartmentNameSL = new SelectList(departmentsQuery.AsNoTracking(),
                 nameof(Department.DepartmentId),
                 nameof(Department.Name),
