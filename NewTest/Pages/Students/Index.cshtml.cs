@@ -59,21 +59,13 @@ namespace NewTest.Pages.Students
 
             }
 
-            switch (sortOrder)
+            studentsIQ = sortOrder switch
             {
-                case "name_desc":
-                    studentsIQ = studentsIQ.OrderByDescending(s => s.LastName);
-                    break;
-                case "Date":
-                    studentsIQ = studentsIQ.OrderBy(s => s.EnrollmentDate);
-                    break;
-                case "date_desc":
-                    studentsIQ = studentsIQ.OrderByDescending(s => s.EnrollmentDate);
-                    break;
-                default:
-                    studentsIQ = studentsIQ.OrderBy(s => s.LastName);
-                    break;
-            }
+                "name_desc" => studentsIQ.OrderByDescending(s => s.LastName),
+                "Date" => studentsIQ.OrderBy(s => s.EnrollmentDate),
+                "date_desc" => studentsIQ.OrderByDescending(s => s.EnrollmentDate),
+                _ => studentsIQ.OrderBy(s => s.LastName)
+            };
 
             //Students = await _context.Students.Take(10).ToListAsync();
             //Students=await studentsIQ.AsNoTracking().ToListAsync();
